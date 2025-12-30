@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <nav style={{ padding: '10px', background: '#333', color: 'white', display: 'flex', justifyContent: 'space-between' }}>
+        <nav style={{ padding: '20px', background: '#333', color: 'white', display: 'flex', justifyContent: 'space-between' }}>
             <Link to="/" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>
                 CineScope
             </Link>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "@/components/MovieCard";
-import { fetchPopularMovies } from "@/services/tmdbService";
+import { fetchPopularMovies, searchMovies } from "@/services/tmdbService";
+import SearchBar from "@/components/SearchBar";
 
 function Home() {
 
@@ -17,6 +18,21 @@ function Home() {
     const handleRemoveMovie = (id) => {
         setWatchlist(watchlist.filter(movie => movie.id !== id));
     };
+
+    const handleSearch = async (query) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const movies = await searchMovies(query);
+            setWatchlist(movies);
+            setLoading(false);
+        } catch (error) {
+            setError(error.message);
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     useEffect(() => {
         const loadMovies = async () => {
@@ -40,6 +56,7 @@ function Home() {
 
     return (
         <div className="App">
+            <SearchBar onSearch={handleSearch} />
             <h2> Películas populares</h2>
             <div className="movie-grid">
                 {loading ? (

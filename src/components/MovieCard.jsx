@@ -1,31 +1,26 @@
 import React from "react";
+import WatchlistContext from "../context/WatchlistContext";
+import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie }) => {
 
-    // const year = movie.releaseDate.split('-')[0];
-
     const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/w1280/";
+
+    const { isInWatchlist, addToWatchlist, removeFromWatchlist } = React.useContext(WatchlistContext);
 
     return (
         <div className="movie-card">
-            {/* 1. Renderizado condicional para la imagen */}
-            {movie.posterPath ? (
-                <img
-                    src={`${IMAGE_BASE_URL}${movie.posterPath}`}
-                    alt={movie.title}
-                    className="movie-poster"
-                    width="200"
-                />
-            ) : (
-                <div className="placeholder-poster">No Poster</div>
-            )}
-
             <div className="info">
                 <h3>{movie.title}</h3>
                 <img src={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} width="200" />
                 <p>{movie.release_date}</p>
-                <p>⭐ {movie.vote_average.toFixed(2)}</p>
-                <button>Ver Detalle</button>
+                <p>⭐ {(movie.vote_average || 0).toFixed(2)}</p>
+                {isInWatchlist(movie.id) ? (
+                    <button onClick={() => removeFromWatchlist(movie.id)}>Quitar de la lista</button>
+                ) : (
+                    <button onClick={() => addToWatchlist(movie)}>Agregar a la lista</button>
+                )}
+                <Link to={`/movie/${movie.id}`}>Ver Detalle</Link>
             </div>
         </div>
     );

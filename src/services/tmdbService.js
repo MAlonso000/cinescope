@@ -18,3 +18,33 @@ export async function fetchPopularMovies() {
         throw new Error('Fallo en la carga de datos de TMDB. Revisa el token o la conexión.');
     }
 }
+
+/**
+ * Obtiene los detalles de una película específica.
+ * @param {number} movieId - ID de la película.
+ * @returns {Promise<Object>} Detalles de la película.
+ */
+export async function fetchMovieDetails(movieId) {
+    try {
+        const response = await api.get(`/movie/${movieId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error al obtener detalles de la película:", error.response || error.message);
+        throw new Error('Fallo en la carga de datos de TMDB. Revisa el token o la conexión.');
+    }
+}
+
+/**
+ * Busca películas por nombre o título.
+ * @param {string} query - Texto de búsqueda.
+ * @returns {Promise<Array>} Un array con los resultados de las películas.
+ */
+export async function searchMovies(query) {
+    try {
+        const response = await api.get(`/search/movie?query=${query}`);
+        return response.data.results;
+    } catch (error) {
+        console.error("Error al buscar películas:", error.response || error.message);
+        throw new Error('Fallo en la búsqueda de películas. Revisa el token o la conexión.');
+    }
+}
