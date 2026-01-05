@@ -7,15 +7,11 @@ const Watchlist = () => {
 
     const { watchlist } = useWatchlist();
     const [sortByRating, setSortByRating] = useState(false);
-    const prevRef = useRef();
     const sortedWatchlist = useMemo(() => {
         console.log("Calcuando ordenación...");
         if (!sortByRating) return watchlist;
         return [...watchlist].sort((a, b) => b.vote_average - a.vote_average);
     }, [watchlist, sortByRating]);
-
-    console.log("¿Es la misma instancia?:", prevRef.current === sortedWatchlist);
-    prevRef.current = sortedWatchlist;
 
     return (
         <div>

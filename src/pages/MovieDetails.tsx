@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useWatchlist } from "../context/WatchlistContext";
 import { useParams } from "react-router-dom";
 import { fetchMovieDetails } from "../services/tmdbService";
+import { Movie } from "../types/movie";
 
 const MovieDetails = () => {
     const { isInWatchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
-    const { id } = useParams();
-    const [movie, setMovie] = useState(null);
+    const { id } = useParams<{ id: string }>();
+    const [movie, setMovie] = useState<Movie | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -16,9 +17,9 @@ const MovieDetails = () => {
         const getMovieDetails = async () => {
             try {
                 setLoading(true);
-                const data = await fetchMovieDetails(id);
+                const data = await fetchMovieDetails(Number(id));
                 setMovie(data);
-            } catch (err) {
+            } catch (err: any) {
                 setError(err.message);
             } finally {
                 setLoading(false);

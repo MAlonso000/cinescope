@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
     const [query, setQuery] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (query.trim()) {
             onSearch(query.trim());

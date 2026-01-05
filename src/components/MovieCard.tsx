@@ -1,12 +1,12 @@
-import React from "react";
-import WatchlistContext from "../context/WatchlistContext";
+import { Movie } from "../types/movie";
+import { useWatchlist } from "../context/WatchlistContext";
 import { Link } from "react-router-dom";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie }: { movie: Movie }) => {
 
-    const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/w1280/";
+    const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
-    const { isInWatchlist, addToWatchlist, removeFromWatchlist } = React.useContext(WatchlistContext);
+    const { isInWatchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
 
     return (
         <div className="movie-card">
@@ -24,6 +24,6 @@ const MovieCard = ({ movie }) => {
             </div>
         </div>
     );
-}
+};
 
 export default MovieCard;
