@@ -1,4 +1,4 @@
-import { useWatchlist } from "../context/WatchlistContext";
+import { useWatchlist } from "@/context/WatchlistContext";
 import { Link } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 import { useMemo, useState } from "react";

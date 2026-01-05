@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useWatchlist } from "../context/WatchlistContext";
+import { useWatchlist } from "@/context/WatchlistContext";
 import { useParams } from "react-router-dom";
-import { fetchMovieDetails } from "../services/tmdbService";
-import { Movie } from "../types/movie";
+import { fetchMovieDetails } from "@/services/tmdbService";
+import { Movie } from "@/types/movie";
 
 const MovieDetails = () => {
     const { isInWatchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
