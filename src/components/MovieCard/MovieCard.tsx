@@ -1,6 +1,7 @@
-import { Movie } from "../types/movie";
-import { useWatchlist } from "../context/WatchlistContext";
+import { Movie } from "@/types/movie";
+import { useWatchlist } from "@/context/WatchlistContext";
 import { Link } from "react-router-dom";
+import { formatRating } from "@/utils/movieUtils";
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
 
@@ -14,7 +15,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
                 <h3>{movie.title}</h3>
                 <img src={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} width="200" />
                 <p>{movie.release_date}</p>
-                <p>⭐ {(movie.vote_average || 0).toFixed(2)}</p>
+                <p>{formatRating(movie.vote_average || 0)}</p>
                 {isInWatchlist(movie.id) ? (
                     <button onClick={() => removeFromWatchlist(movie.id)}>Quitar de la lista</button>
                 ) : (

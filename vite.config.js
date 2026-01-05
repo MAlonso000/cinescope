@@ -9,5 +9,9 @@ export default defineConfig({
     alias: [
       { find: '@', replacement: '/src' }
     ]
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
   }
 })
